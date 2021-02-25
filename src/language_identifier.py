@@ -1,28 +1,14 @@
 # Install specific dependencies
 import subprocess
 import sys
-
-
-def install(package):
-    response = input("If package " + package + " not available, it needs to be installed (y/n) or skip (s).")
-    if response == "y":
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    elif response == "s":
-        pass
-    else:
-        exit("Failed to meet requirements.")
-
-
-# install('xgboost==1.3.3')
-# install('scikit-learn==0.23.1')
-
 from gensim import utils
-from collections import Counter
 import gensim.parsing.preprocessing as gpp
 import xgboost as xgb
 from joblib import load
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.base import BaseEstimator
+# installed xgboost==1.3.3
+# installed scikit-learn==0.23.1
 
 
 # Specific pre-processing transformer
@@ -40,7 +26,7 @@ class Text2TfIdfTransformer(BaseEstimator):
     def transform(self, df_x):
         return self._model.transform(df_x)
 
-
+# Preprocessing used for training the data
 def clean_text(text):
     text_filters = [
         gpp.strip_tags,
@@ -82,19 +68,17 @@ with open(inFile, "r", encoding="utf-8") as f:
     text = f.readlines()
 
 print("Evaluating input file.")
-df_test = [clean_text(x) for x in text]
-df_test = tfidf_transformer.transform(df_test)
+input_text = [clean_text(x) for x in text]
+input_text = [" ".join(input_text)]
+input_text = tfidf_transformer.transform(input_text)
 
 # Predict language of each line
 print("Identifying language of document.")
-y_pred = model.predict(df_test)
+y_pred = model.predict(input_text)
 
-# Most common language identified
-b = Counter(y_pred)
-guess = b.most_common(1)[0][0]
 
 # Output best guess
 try:
-    print("---> Identified language of the document: " + lang_codes[guess])
+    print("---> Identified language of the document: " + lang_codes[y_pred[0]])
 except KeyError:
     print("Language could not be identified. Sorry.")
