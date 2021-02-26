@@ -1,3 +1,5 @@
+# Copyright 2021, Philipp Wicke, All rights reserved.
+
 # Install specific dependencies
 import subprocess
 import sys

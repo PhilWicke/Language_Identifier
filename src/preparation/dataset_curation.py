@@ -1,3 +1,5 @@
+# Copyright 2021, Philipp Wicke, All rights reserved.
+
 # Loading data from the WiLI-2018 - Wikipedia Language Identification database
 with open("wili-2018/x_train.txt", "r") as x_train_file:
   x_train_lines = x_train_file.readlines()
