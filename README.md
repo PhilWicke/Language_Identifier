@@ -1,7 +1,7 @@
 # Language Identifier
 
 ## Language Identification using XGBoost
-Code for training and application of a language identification model. The model has been trained on the [WiLI-2018 - Wikipedia Language Identification database](https://zenodo.org/record/841984). The classifier is an [XGBoost model](https://xgboost.readthedocs.io/en/latest/) and achieves an **accuracy of 85.97%** on the WiLi test dataset.
+Code for training and application of a language identification model. The model has been trained on the [WiLI-2018 - Wikipedia Language Identification database](https://zenodo.org/record/841984). The classifier is an [XGBoost model](https://xgboost.readthedocs.io/en/latest/) and achieves an **accuracy of 85.97%** on the WiLi test dataset for 235 languages.
 
 ## Requirements
 - Python 3.7+
@@ -22,4 +22,9 @@ The model is built using XGBoost, a decision-tree-based ensemble Machine Learnin
 
 ## Data
 The [WiLI-2018 - Wikipedia Language Identification database](https://zenodo.org/record/841984) contains 235000 paragraphs of 235 languages. Language labels for identification and prediction, as well as links to train and test data are provided in the data folders. The languages range from Achinese, Afrikaans and Alemannic German to Yiddish, Yoruba to Zeeuws.
+
+## Explanation
+The first attempt of [native language identification was a simple n-gram based approach](https://www.aclweb.org/anthology/W13-1729.pdf), which is one of the most common approaches to this problem. Code for this attempt is stored in the ```scr/naive_bayes``` directory. While it is know that this approach gives fairly good results, the implemented naive bayes has been included for the sake of completion. The XGBoost model demonstrates an attempt at using a state-of-the-art machine learning model for language classification with 235 languages without any ngram parsing.
+
+
 
